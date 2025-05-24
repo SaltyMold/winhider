@@ -56,7 +56,7 @@ To use this application, you can either use the installer or the portable versio
 
 ### Use the binary installer (recommended)
 
- - Download and run [`WinhiderInstaller.exe`](https://github.com/radiantly/Winhider/releases/download/latest/WinhiderInstaller.exe).
+ - Download and run [`WinhiderInstaller.exe`](https://github.com/aamitn/Winhider/releases/download/latest/WinhiderInstaller.exe).
  - Once the installation is complete, you will be able to run `Winhider` from the Start Menu.
 
 ### Download the portable zip with prebuilt binaries
