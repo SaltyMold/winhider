@@ -2,6 +2,9 @@
 <img src=".\Misc\whicon.png" alt="WinHider Logo" width="100" height="100" align="left"/>
 
 [![Build App](https://github.com/aamitn/winhider/actions/workflows/build.yml/badge.svg)](https://github.com/aamitn/winhider/actions/workflows/build.yml)
+[![License](https://img.shields.io/github/license/aamitn/winhider)](./LICENSE)
+[![Version](https://img.shields.io/github/v/release/aamitn/winhider)](https://github.com/aamitn/Winhider/releases/)
+
 
 `WinHider` (short for _`Window Hider`_) is an application that allows you to hide user defined windows from screensharing (zoom, ms-teams, gmeet etc.) and also from taskbar / taskswitcher (Alt-Tab)
 
