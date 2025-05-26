@@ -4,12 +4,14 @@
 [![Build App](https://github.com/aamitn/winhider/actions/workflows/build.yml/badge.svg)](https://github.com/aamitn/winhider/actions/workflows/build.yml)
 [![License](https://img.shields.io/github/license/aamitn/winhider)](./LICENSE)
 [![Version](https://img.shields.io/github/v/release/aamitn/winhider)](https://github.com/aamitn/Winhider/releases/)
-[![GH Pages Deploy](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml/badge.svg)](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml)
+
 
 
 `WinHider` (short for _`Window Hider`_) is an application that allows you to hide user defined windows from screensharing (zoom, ms-teams, gmeet etc.) and also from taskbar / taskswitcher (Alt-Tab)
 
-Original Fork From : [`https://github.com/radiantly/invisiwind`](https://github.com/radiantly/invisiwind)
+Website Repo for docs and landing : [`https://github.com/aamitn/winhider-website`](https://github.com/aamitn/winhider-website)
+[![GH Pages Deploy](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml/badge.svg)](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml)
+
 
 ## Glimpse of the GUI and CLI
 <p float="left">
