@@ -31,7 +31,7 @@ jobs:
         run: sign.cmd -p "${{ secrets.WINHIDER_CERT_SIGN_PASSWORD }}"
 
       - name: Generate zip bundle
-        run: 7z a -tzip Winhider.zip .\hide_hotkey.ahk .\Build\bin\Release\*.dll .\Build\bin\Release\*.exe .\Misc\redistributables\vc_redist*.exe
+        run: 7z a -tzip Winhider.zip .\hide_hotkey.ahk .\Build\bin\Release\*.dll .\Build\bin\Release\*.exe
 
       - name: Build Installer
         run: iscc .\Misc\inno.iss

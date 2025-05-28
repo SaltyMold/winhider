@@ -7,6 +7,12 @@
 #define MyAppURL "https://github.com/aamitn/winhider"
 
 [Code]
+//Download Completion Flafs
+var
+  VC_x86_Downloaded: Boolean;
+  VC_x64_Downloaded: Boolean;
+
+// CLI App Name  
 function MyAppExeName(Param: String): String;
 begin
   if IsWin64 then 
@@ -14,6 +20,8 @@ begin
   else 
     Result := 'Winhider_32bit.exe';
 end;
+
+// GUI App Name  
 function MyAppExeGuiName(Param: String): String;
 begin
   if IsWin64 then 
@@ -21,6 +29,76 @@ begin
   else 
     Result := 'WinhiderGui_32bit.exe';
 end;
+
+// Log Download Progress
+function OnDownloadProgress(const Url, Filename: String; const Progress, ProgressMax: Int64): Boolean;
+begin
+  if ProgressMax <> 0 then
+    Log(Format('%s: %d of %d bytes done.', [Filename, Progress, ProgressMax]))
+  else
+    Log(Format('%s: %d bytes done.', [Filename, Progress]));
+  Result := True;
+end;
+
+// Download the VC Redist files
+function InitializeSetup: Boolean;
+var
+  downloadFailed: Boolean;
+begin
+  VC_x86_Downloaded := False;
+  VC_x64_Downloaded := False;
+  downloadFailed := False;
+
+  try
+    DownloadTemporaryFile(
+      'https://aka.ms/vs/17/release/vc_redist.x86.exe',
+      'vc_redist.x86.exe',
+      '', @OnDownloadProgress
+    );
+    VC_x86_Downloaded := True;
+  except
+    Log('Failed to download vc_redist.x86.exe: ' + GetExceptionMessage);
+    downloadFailed := True;
+  end;
+
+  if Is64BitInstallMode then
+  begin
+    try
+      DownloadTemporaryFile(
+        'https://aka.ms/vs/17/release/vc_redist.x64.exe',
+        'vc_redist.x64.exe',
+        '', @OnDownloadProgress
+      );
+      VC_x64_Downloaded := True;
+    except
+      Log('Failed to download vc_redist.x64.exe: ' + GetExceptionMessage);
+      downloadFailed := True;
+    end;
+  end;
+
+  if downloadFailed then
+  begin
+    MsgBox(
+      'One or more required VC++ Redistributable files could not be downloaded.' + #13#10 +
+      'You may need to install them manually after the setup completes.',
+      mbError, MB_OK
+    );
+  end;
+
+  Result := True; // Let the setup continue
+end;
+
+// Set Flags for vc redist downloads
+function ShouldRunVCX86: Boolean;
+begin
+  Result := VC_x86_Downloaded;
+end;
+
+function ShouldRunVCX64: Boolean;
+begin
+  Result := VC_x64_Downloaded and Is64BitInstallMode;
+end;
+
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -58,8 +136,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 ; Add VC Redist 2015–2022 Installers [ https://aka.ms/vs/17/release/vc_redist.x86.exe and  https://aka.ms/vs/17/release/vc_redist.x64.exe ]
-Source: ".\redistributables\vc_redist.x86.exe"; DestDir: {tmp}; Flags: deleteafterinstall  
-Source: ".\redistributables\vc_redist.x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall    
+; Uncomment below to use local files
+; Source: ".\redistributables\vc_redist.x86.exe"; DestDir: {tmp}; Flags: deleteafterinstall  
+; Source: ".\redistributables\vc_redist.x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall    
 
 Source: "..\Build\bin\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -76,14 +155,16 @@ Name: "{autodesktop}\{#MyAppName}GUI"; Filename: "{app}\{code:MyAppExeGuiName}";
 ; Install VC Redist 2015–2022 x86
 Filename: "{tmp}\vc_redist.x86.exe"; \
     Parameters: "/passive /norestart"; \
-    StatusMsg: "Installing VC++ 2015–2022 x86 Redistributable..."; \
-    Flags: waituntilterminated
+    StatusMsg: "Installing VC++ x86 Redistributable..."; \
+    Flags: waituntilterminated; \
+    Check: ShouldRunVCX86
 
 ; Install VC Redist 2015–2022 x64
 Filename: "{tmp}\vc_redist.x64.exe"; \
     Parameters: "/passive /norestart"; \
-    StatusMsg: "Installing VC++ 2015–2022 x64 Redistributable..."; \
-    Flags: waituntilterminated
+    StatusMsg: "Installing VC++ x64 Redistributable..."; \
+    Flags: waituntilterminated; \
+    Check: ShouldRunVCX64
     
 Filename: "{app}\{code:MyAppExeGuiName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent; WorkingDir: "{app}"
 
