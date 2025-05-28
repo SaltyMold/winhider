@@ -105,17 +105,24 @@ To use this application, you can either use the installer or the portable versio
 - 🔗 **Timestamp Server:**  `http://timestamp.comodoca.com/authenticode` (Uses Comodo’s timestamp server)
 > ⚠️ **Important:** Password must be enclosed in quotes. Avoid hardcoding passwords—pass them securely using environment variables or CI/CD secrets.
 
-## FAQs
+## ❓ FAQs
 
-#### What OSes are supported?
+### **⚠️Getting Error for missing `MSVCP140.dll` , `VCRUNTIME140.dll` or `VCRUNTIME140_1.dll` , what to do?**
+
+These errors mean the **Microsoft Visual C++ Redistributable** is not installed. Please Download and install the redistributables for your system , restart your PC and try again:
+- [Visual C++ Redistributable x86 (32-bit)](https://aka.ms/vs/17/release/vc_redist.x86.exe)  
+- [Visual C++ Redistributable x64 (64-bit)](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+
+
+### **💻 What OSes are supported?**
 
 Microsoft Windows 10 v2004 or above. On previous versions of windows, a black screen shows up instead of hiding the window.
 
-#### Do future instances of the application get automatically hidden?
+### **🕝Do future instances of the application get automatically hidden?**
 
 No
 
-#### Is it possible to see a preview of the screen on my side?
+### **👀 Is it possible to see a preview of the screen on my side?**
 - You can simply use [`OBS Studio`](obsproject.com/download) with Windowed Projectors.
 - Open OBS and do first-time setup.
 - Then Right-Click under Sources-> Add-> Display Capture->OK-> Select Monitor under `Display` Dropdown-> OK. Now you will see infinity mirror if you have single diplay.
@@ -131,7 +138,7 @@ _Tip: you can hide the Projector window from view too._
 
 </details>
 
-#### Could I automatically hide windows using a hotkey?
+### **▶️ Could I automatically hide windows using a hotkey?**
 
 Yes! with the installer and zip-bundles we provide 3 ways to achieve this : 
 - An Autohotkey(.ahk) script named `hide_hotkey.ahk` which could be run using Autohotkey v2+.
@@ -148,6 +155,6 @@ Yes! with the installer and zip-bundles we provide 3 ways to achieve this :
 	`Ctrl+Shift+Q` -> Exit/Quit Hotkey Script
 	 >
 
-## Contributing
+## Contribution Guideline
 
-Feel free to open an [`issue`](https://github.com/aamitn/winhider/issues/new) / [`PR`](https://github.com/aamitn/winhider/compare) if you find a bug or would like to contribute!
+Feel free to open an [`Issue`](https://github.com/aamitn/winhider/issues/new) / [`PR`](https://github.com/aamitn/winhider/compare) if you find a bug or would like to contribute!
