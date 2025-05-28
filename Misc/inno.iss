@@ -44,7 +44,7 @@ Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 ; Custom install options
-ArchitecturesInstallIn64BitMode=x64
+ArchitecturesInstallIn64BitMode=x64compatible 
 SetupIconFile=whicon.ico
 
 UninstallDisplayIcon={app}\{code:MyAppExeName}
@@ -57,6 +57,10 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
+; Add VC Redist 2015–2022 Installers [ https://aka.ms/vs/17/release/vc_redist.x86.exe and  https://aka.ms/vs/17/release/vc_redist.x64.exe ]
+Source: ".\redistributables\vc_redist.x86.exe"; DestDir: {tmp}; Flags: deleteafterinstall  
+Source: ".\redistributables\vc_redist.x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall    
+
 Source: "..\Build\bin\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\hide_hotkey.ahk"; DestDir: "{app}"; Flags: ignoreversion
@@ -69,4 +73,19 @@ Name: "{autoprograms}\{#MyAppName}GUI"; Filename: "{app}\{code:MyAppExeGuiName}"
 Name: "{autodesktop}\{#MyAppName}GUI"; Filename: "{app}\{code:MyAppExeGuiName}"; Tasks: desktopicon
 
 [Run]
+; Install VC Redist 2015–2022 x86
+Filename: "{tmp}\vc_redist.x86.exe"; \
+    Parameters: "/passive /norestart"; \
+    StatusMsg: "Installing VC++ 2015–2022 x86 Redistributable..."; \
+    Flags: waituntilterminated
+
+; Install VC Redist 2015–2022 x64
+Filename: "{tmp}\vc_redist.x64.exe"; \
+    Parameters: "/passive /norestart"; \
+    StatusMsg: "Installing VC++ 2015–2022 x64 Redistributable..."; \
+    Flags: waituntilterminated
+    
 Filename: "{app}\{code:MyAppExeGuiName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent; WorkingDir: "{app}"
+
+[UninstallDelete]
+Type: dirifempty; Name: "{app}"
