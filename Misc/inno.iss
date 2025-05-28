@@ -7,11 +7,11 @@
 #define MyAppURL "https://github.com/aamitn/winhider"
 
 [Code]
-//Download Completion Flafs
+//variable declarations
 var
   VC_x86_Downloaded: Boolean;
   VC_x64_Downloaded: Boolean;
-
+  downloadFailed: Boolean;
 // CLI App Name  
 function MyAppExeName(Param: String): String;
 begin
@@ -42,8 +42,6 @@ end;
 
 // Download the VC Redist files
 function InitializeSetup: Boolean;
-var
-  downloadFailed: Boolean;
 begin
   VC_x86_Downloaded := False;
   VC_x64_Downloaded := False;
@@ -79,8 +77,11 @@ begin
   if downloadFailed then
   begin
     MsgBox(
-      'One or more required VC++ Redistributable files could not be downloaded.' + #13#10 +
-      'You may need to install them manually after the setup completes.',
+      'One or more required VC++ Redistributable files could not be downloaded.' + #13#10#13#10 +
+      'Please download and install them manually from the following links:' + #13#10 +
+      'x86: https://aka.ms/vs/17/release/vc_redist.x86.exe' + #13#10 +
+      'x64: https://aka.ms/vs/17/release/vc_redist.x64.exe' + #13#10#13#10 +
+      'Click OK to continue with the setup.',
       mbError, MB_OK
     );
   end;
