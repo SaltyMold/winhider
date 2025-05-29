@@ -27,7 +27,8 @@ Below is an explainer video:
 
 ![explainer](./Misc/illustration.gif)
 
-![explainer](https://pouch.jumpshare.com/preview/YNtZzR3y2kEuAjGeUWDhgSWyaI7G-XAQ2RlboRTPK6jxCsuLW6clbW4wuFjx2Vkvj-SYxryBw7imI2TN9L9I-5rzG1XSwu1TRjsWKxEcSvE)
+![explainer](https://pouch.jumpshare.com/preview/YNtZzR3y2kEuAjGeUWDhgSWyaI7G-XAQ2RlboRTPK6jxCsuLW6clbW4wuFjx2VkvvH8C91vNERKguG6XHiA5Rrh9hRZRmedE6SZjpjlAcTA)
+
 
 >The above GIF illustrates how I used WinHider to hide the Notepad window from my screenshare and taskbar/taskswitcher while still being able to see it on my end. This is useful when you want to share your screen but don't want the other participants to see the Screensharing window itself.
 
