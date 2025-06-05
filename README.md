@@ -6,11 +6,11 @@
 [![Version](https://img.shields.io/github/v/release/aamitn/winhider)](https://github.com/aamitn/Winhider/releases/)
 
 
-| **Release Type**    | **Link**                                                                                                                                                                                          |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Winget**          | `winget install winhider`                                                                                                                                                                         |
+| **Release Type**    | **Link**                                                                                                                                                                                            |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Winget**          | **`winget install winhider`**                                                                                                                                                                       |
 | **Github Release**  | [Installer Link](https://github.com/aamitn/winhider/releases/download/v0.8.15/WinhiderInstaller.exe) • [Zip Bundle Link](https://github.com/aamitn/winhider/releases/download/v0.8.15/Winhider.zip) |
-| **Microsoft Store** | [Store Link](https://www.xbox.com/en-IN/auth/msa?action=logIn&returnUrl=%2Fen-IN%2Fgames%2Fstore%2Fdoom-the-dark-ages%2F9ph9x0760b0t&prompt=none)                                                 |
+| **Microsoft Store** | [Store Link](https://www.xbox.com/en-IN/auth/msa?action=logIn&returnUrl=%2Fen-IN%2Fgames%2Fstore%2Fdoom-the-dark-ages%2F9ph9x0760b0t&prompt=none)                                                   |
 
 
 
