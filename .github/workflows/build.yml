@@ -28,6 +28,7 @@ env:
 
 jobs:
   build:
+    name: Build/Release C++ project with MsBuild
     runs-on: windows-latest
 
     steps:
@@ -56,22 +57,25 @@ jobs:
         shell: cmd
         run: sign.cmd -i -p "${{ secrets.WINHIDER_CERT_SIGN_PASSWORD }}"
 
-      - name: Publish latest pre-release
-        uses: marvinpinto/action-automatic-releases@latest
+
+      - name: Publish un-tagged latest pre-release
+        uses: softprops/action-gh-release@v2
         with:
-          repo_token: "${{ secrets.GH_WORKFLOW_TOKEN_WINHIDER }}"
-          automatic_release_tag: "latest"
-          prerelease: true
+          draft : true
+          generate_release_notes: true
+          token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             Winhider.zip
             Misc/Output/WinhiderInstaller.exe
 
       - if: startsWith(github.ref, 'refs/tags/v')
-        name: Publish tagged release
-        uses: marvinpinto/action-automatic-releases@latest
+        name: Publish tagged release 
+        uses: softprops/action-gh-release@v2
         with:
-          repo_token: "${{ secrets.GH_WORKFLOW_TOKEN_WINHIDER }}"
-          prerelease: false
+          draft : false
+          make_latest: true
+          generate_release_notes: true
+          token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             Winhider.zip
             Misc/Output/WinhiderInstaller.exe
