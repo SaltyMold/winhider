@@ -15,8 +15,6 @@ permissions:
   contents: write # for auto-release
   pages: write # for GitHub Pages deployment
   id-token: write
-
-
   
 env:
   #BUILD_PATH: "." # default value when not using subfolders
@@ -67,7 +65,6 @@ jobs:
 
       - name: Publish un-tagged latest pre-release
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/heads')
         with:
           name: ${{ steps.release_name.outputs.RELEASE_NAME }}
           draft : true
@@ -141,7 +138,6 @@ jobs:
           path: ${{ env.ASTRO_BUILD_PATH }}/dist
 
   deploy:
-    if: startsWith(github.ref, 'refs/tags/v')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
