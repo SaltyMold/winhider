@@ -58,10 +58,22 @@ jobs:
         run: sign.cmd -i -p "${{ secrets.WINHIDER_CERT_SIGN_PASSWORD }}"
 
 
+      - name: Set release name
+        id: release_name
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            tag="${GITHUB_REF#refs/tags/}"
+            echo "RELEASE_NAME=appname-${tag}" >> $GITHUB_OUTPUT
+          else
+            echo "RELEASE_NAME=appname-draft" >> $GITHUB_OUTPUT
+
+
       - name: Publish un-tagged latest pre-release
         uses: softprops/action-gh-release@v2
         with:
+          name: ${{ steps.release_name.outputs.RELEASE_NAME }}
           draft : true
+          prerelease: true
           generate_release_notes: true
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
@@ -72,6 +84,7 @@ jobs:
         name: Publish tagged release 
         uses: softprops/action-gh-release@v2
         with:
+          name: ${{ steps.release_name.outputs.RELEASE_NAME }}
           draft : false
           make_latest: true
           generate_release_notes: true
