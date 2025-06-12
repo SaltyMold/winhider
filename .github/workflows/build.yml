@@ -62,7 +62,7 @@ jobs:
             $tag = $env:GITHUB_REF -replace '^refs/tags/', ''
             "RELEASE_NAME=WinHider-$tag" >> $env:GITHUB_OUTPUT
           } else {
-            "RELEASE_NAME=WinHider-draft" >> $env:GITHUB_OUTPUT
+            "RELEASE_NAME=WinHider-SNAPSHOT" >> $env:GITHUB_OUTPUT
           }
 
       - name: Publish un-tagged latest pre-release
