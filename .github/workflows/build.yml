@@ -76,7 +76,7 @@ jobs:
             Winhider.zip
             Misc/Output/WinhiderInstaller.exe
 
-        name: Publish tagged release 
+      - name: Publish tagged release 
         uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
