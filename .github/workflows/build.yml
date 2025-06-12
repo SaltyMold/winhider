@@ -16,10 +16,7 @@ permissions:
   pages: write # for GitHub Pages deployment
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+
   
 env:
   #BUILD_PATH: "." # default value when not using subfolders
