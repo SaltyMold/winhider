@@ -78,6 +78,7 @@ jobs:
 
   build-astro:
     name: Build Astro/Starlight Landing and Docs
+    needs: build # Requires building of project to finish to auto-publish latest release ver in astro static site
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
