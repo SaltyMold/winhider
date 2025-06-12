@@ -20,8 +20,15 @@ env:
   #BUILD_PATH: "." # default value when not using subfolders
   ASTRO_BUILD_PATH: site
 
-
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print ref info
+        run: echo "${{ github.ref }}"
+
+
+
   build:
     if: startsWith(github.ref, 'refs/heads/')
     name: Build/Release C++ project with MsBuild
