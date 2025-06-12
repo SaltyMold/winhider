@@ -106,6 +106,10 @@ To use this application, you can either use the installer or the portable versio
 - 🔗 **Timestamp Server:**  `http://timestamp.comodoca.com/authenticode` (Uses Comodo’s timestamp server)
 > ⚠️ **Important:** Password must be enclosed in quotes. Avoid hardcoding passwords—pass them securely using environment variables or CI/CD secrets.
 
+## Landing Page and Docs Site
+
+Astro and Astro-Starlight website located at <a href="./site/">**`./site`**</a> directory
+
 ## ❓ FAQs
 
 ### **⚠️Getting Error for missing `MSVCP140.dll` , `VCRUNTIME140.dll` or `VCRUNTIME140_1.dll` , what to do?**
@@ -155,6 +159,7 @@ Yes! with the installer and zip-bundles we provide 3 ways to achieve this :
 	`Ctrl+F10` 	   -> Show/Hide Toggle Autohotkey Script Runner System Tray Icon
 	`Ctrl+Shift+Q` -> Exit/Quit Hotkey Script
 	 >
+
 
 ## Contribution Guideline
 

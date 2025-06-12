@@ -1,0 +1,127 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getLatestRelease, formatVersion } from '../utils/github.js';
+
+//Repo information
+const owner = "aamitn";
+const repo = "winhider";
+
+// Fetch latest release info from GitHub
+let latestVersion = "Loading...";
+let releaseDate = "";
+let installerLink = "";
+try {
+  const release = await getLatestRelease(owner, repo);
+  if (release) {
+    latestVersion = formatVersion(release.tag_name);
+    releaseDate = new Date(release.published_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    installerLink = `https://github.com/${owner}/${repo}/releases/download/${release.tag_name}/WinhiderInstaller.exe`;
+  }
+} catch (e) {
+  latestVersion = "Unavailable";
+  releaseDate = "";
+  installerLink = `https://github.com/${owner}/${repo}/releases/latest`;
+}
+
+// Define download options
+const downloadOptions = [
+  {
+    title: "Windows Package Manager (Winget)",
+    description: "The fastest way to install WinHider",
+    command: "winget install winhider",
+    icon: "mdi:microsoft-windows",
+    isPrimary: true
+  },
+  {
+    title: "GitHub Release",
+    description: "Download the latest installer or portable zip",
+    links: [
+      {
+        label: "Installer (.exe)",
+        url: installerLink,
+        icon: "mdi:download"
+      },
+      {
+        label: "Portable (.zip)",
+        url: installerLink.replace("WinhiderInstaller.exe", "Winhider.zip"),
+        icon: "mdi:archive"
+      }
+    ],
+    icon: "mdi:github",
+    isPrimary: false
+  },
+  {
+    title: "Microsoft Store",
+    description: "Install from the Microsoft Store",
+    link: "https://apps.microsoft.com/store/search?publisher=bitmutex",
+    icon: "mdi:microsoft",
+    isPrimary: false
+  }
+];
+---
+
+<section id="download" class="py-16 md:py-24">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16 animate-on-scroll">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Download WinHider</h2>
+      <p class="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+        Latest release: <span class="font-semibold">{latestVersion}</span> (Released: {releaseDate})
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {downloadOptions.map((option) => (
+        <div class={`rounded-xl p-6 animate-on-scroll hover-lift ${option.isPrimary ? 'bg-primary-600 text-white' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700'}`}>
+          <div class={`${option.isPrimary ? 'text-white' : 'text-primary-600 dark:text-primary-400'} mb-4`}>
+            <Icon name={option.icon} class="w-10 h-10" />
+          </div>
+          <h3 class="text-xl font-semibold mb-2">{option.title}</h3>
+          <p class={`mb-4 ${option.isPrimary ? 'text-primary-100' : 'text-gray-600 dark:text-gray-400'}`}>
+            {option.description}
+          </p>
+
+          {option.command ? (
+            <div class={`copy-command ${option.isPrimary ? 'bg-primary-700' : 'bg-gray-100 dark:bg-gray-900'}`}>
+              <code>{option.command}</code>
+              <button class="copy-btn" aria-label="Copy command">
+                <Icon name="mdi:content-copy" class="w-5 h-5" />
+              </button>
+            </div>
+          ) : option.links ? (
+            <div class="flex flex-row gap-2">
+              {option.links.map(link => (
+                <a 
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                    option.isPrimary 
+                    ? 'bg-white text-primary-600 hover:bg-gray-100' 
+                    : 'bg-primary-600 text-white hover:bg-primary-700'
+                  }`}
+                >
+                  <Icon name={link.icon} class="w-5 h-5" />
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          ) : (
+            <a 
+              href={option.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                option.isPrimary 
+                ? 'bg-white text-primary-600 hover:bg-gray-100' 
+                : 'bg-primary-600 text-white hover:bg-primary-700'
+              }`}
+            >
+              <Icon name="mdi:download" class="w-5 h-5" />
+              Download
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
