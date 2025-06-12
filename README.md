@@ -1,13 +1,20 @@
 # WinHider
-<img src=".\Misc\whicon.png" alt="WinHider Logo" width="100" height="100" align="left"/>
+<img src=".\Misc\whicon.png" alt="WinHider Logo" width="200" align="left"/>
 
 [![Build App](https://github.com/aamitn/winhider/actions/workflows/build.yml/badge.svg)](https://github.com/aamitn/winhider/actions/workflows/build.yml)
 [![License](https://img.shields.io/github/license/aamitn/winhider)](./LICENSE)
 [![Version](https://img.shields.io/github/v/release/aamitn/winhider)](https://github.com/aamitn/Winhider/releases/)
 
 
+| **Release Type**    | **Link**                                                                                                                                                                                            |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Winget**          | **`winget install winhider`**                                                                                                                                                                       |
+| **Github Release**  | [Installer Link](https://github.com/aamitn/winhider/releases/download/v0.8.15/WinhiderInstaller.exe) • [Zip Bundle Link](https://github.com/aamitn/winhider/releases/download/v0.8.15/Winhider.zip) |
+| **Microsoft Store** | [Store Link](https://www.xbox.com/en-IN/auth/msa?action=logIn&returnUrl=%2Fen-IN%2Fgames%2Fstore%2Fdoom-the-dark-ages%2F9ph9x0760b0t&prompt=none)                                                   |
 
-`WinHider` (short for _`Window Hider`_) is an application that allows you to hide user defined windows from screensharing (zoom, ms-teams, gmeet etc.) and also from taskbar / taskswitcher (Alt-Tab)
+
+
+**`WinHider`** (short for _`Window Hider`_) is an application that allows you to hide user defined windows from screensharing (zoom, ms-teams, gmeet etc.) and also from taskbar / taskswitcher (Alt-Tab). Comes with both GUI and CLI.
 
 Website Repo for docs and landing : [`https://github.com/aamitn/winhider-website`](https://github.com/aamitn/winhider-website)
 [![GH Pages Deploy](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml/badge.svg)](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml)
