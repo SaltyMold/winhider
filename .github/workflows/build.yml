@@ -1,6 +1,13 @@
 name: Build Release Deploy App 
 
 on:
+  push:
+    branches:
+      - main         # For untagged builds like "latest"
+    tags:
+      - 'v*.*.*'         # For tagged releases like v1.0.0
+  pull_request:
+    types: [closed]
   workflow_dispatch: # Manual trigger via GitHub UI
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -60,7 +67,7 @@ jobs:
 
       - name: Publish un-tagged latest pre-release
         uses: softprops/action-gh-release@v2
-        if: github.ref_type != 'tag'
+        if: startsWith(github.ref, 'refs/heads')
         with:
           name: ${{ steps.release_name.outputs.RELEASE_NAME }}
           draft : true
@@ -73,7 +80,7 @@ jobs:
 
       - name: Publish tagged release 
         uses: softprops/action-gh-release@v2
-        if: github.ref_type == 'tag'
+        if: startsWith(github.ref, 'refs/tags/v')
         with:
           name: ${{ steps.release_name.outputs.RELEASE_NAME }}
           draft : false
