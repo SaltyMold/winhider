@@ -60,6 +60,7 @@ jobs:
 
       - name: Set release name
         id: release_name
+        shell: bash
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
             tag="${GITHUB_REF#refs/tags/}"
