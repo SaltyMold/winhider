@@ -1,4 +1,4 @@
-name: Build Release Deploy App 
+name: Build Release Deploy 
 
 on:
   push:
