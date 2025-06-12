@@ -1,4 +1,4 @@
-name: Build Release Deploy App 
+name: Build Release Deploy App UNTAGGED
 
 on:
   push:
@@ -63,13 +63,13 @@ jobs:
           }
 
 
-      - name: Publish tagged release 
+      - name: Publish un-tagged latest pre-release
         uses: softprops/action-gh-release@v2
-        if: github.ref_type == 'tag'
+        if: github.ref_type != 'tag'
         with:
           name: ${{ steps.release_name.outputs.RELEASE_NAME }}
-          draft : false
-          make_latest: true
+          draft : true
+          prerelease: true
           generate_release_notes: true
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
