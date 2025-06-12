@@ -23,6 +23,7 @@ env:
 
 jobs:
   build:
+    if: startsWith(github.ref, 'refs/tags/')
     name: Build/Release C++ project with MsBuild
     runs-on: windows-latest
 
@@ -77,6 +78,7 @@ jobs:
             Misc/Output/WinhiderInstaller.exe
 
   build-astro:
+    if: startsWith(github.ref, 'refs/tags/')
     name: Build Astro/Starlight Landing and Docs
     needs: build # Requires building of project to finish to auto-publish latest release ver in astro static site
     runs-on: ubuntu-latest
@@ -126,6 +128,7 @@ jobs:
           path: ${{ env.ASTRO_BUILD_PATH }}/dist
 
   deploy:
+    if: startsWith(github.ref, 'refs/tags/')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
