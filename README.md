@@ -12,7 +12,11 @@
 | **Github Release**  | [Installer Link](https://github.com/aamitn/winhider/releases/download/v0.8.15/WinhiderInstaller.exe) • [Zip Bundle Link](https://github.com/aamitn/winhider/releases/download/v0.8.15/Winhider.zip) |
 | **Microsoft Store** | [Store Link](https://www.xbox.com/en-IN/auth/msa?action=logIn&returnUrl=%2Fen-IN%2Fgames%2Fstore%2Fdoom-the-dark-ages%2F9ph9x0760b0t&prompt=none)                                                   |
 
-
+**Inno Installer Silet Switches** : `/VERYSILENT` , `/CURRENTUSER`  [Required for winget/ms store publishing]
+- Example Silent Install Command:
+	```sh
+	WinhiderInstaller.exe /VERYSILENT /CURRENTUSER
+	```
 
 **`WinHider`** (short for _`Window Hider`_) is an application that allows you to hide user defined windows from screensharing (zoom, ms-teams, gmeet etc.) and also from taskbar / taskswitcher (Alt-Tab). Comes with both GUI and CLI.
 
@@ -171,3 +175,4 @@ Yes! with the installer and zip-bundles we provide 3 ways to achieve this :
 ## Contribution Guideline
 
 Feel free to open an [`Issue`](https://github.com/aamitn/winhider/issues/new) / [`PR`](https://github.com/aamitn/winhider/compare) if you find a bug or would like to contribute!
+
