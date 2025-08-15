@@ -18,7 +18,7 @@ import { asset } from '../utils/asset';
         <p class="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl">
           WinHider allows you to hide specific windows from screen sharing applications and from the taskbar/task switcher while maintaining visibility on your own screen.
         </p>
-        
+         
         <div class="mb-8 flex flex-wrap gap-4 hero-flex">
           <a href="./#download" class="btn-primary px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all flex items-center gap-2 hover-lift">
             <Icon name="mdi:download" class="w-5 h-5" />
@@ -29,14 +29,32 @@ import { asset } from '../utils/asset';
             Documentation
           </a>
         </div>
-        
+         
         <div class="copy-command">
           <code>winget install winhider</code>
           <button class="copy-btn" aria-label="Copy command">
             <Icon name="mdi:content-copy" class="w-5 h-5" />
           </button>
         </div>
+
+        <div class="flex justify-start items-center my-5 scale-[0.6] sm:scale-[0.75] origin-left">
+          <script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
+          <ms-store-badge
+            id="ms-store-badge"
+            productid="XP99GV9280HRFP"
+            window-mode="full"
+            theme="auto"
+            size="large"
+            language="en-us"
+            animation="on">
+          </ms-store-badge>
+        </div>
         
+        
+        
+
+
+         
         <div class="mt-6 flex items-center">
           <GitHubStats username="aamitn" repo="winhider" />
           <a href="https://github.com/aamitn/winhider" target="_blank" rel="noopener noreferrer" class="ml-4 flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 transition-colors">
@@ -45,7 +63,7 @@ import { asset } from '../utils/asset';
           </a>
         </div>
       </div>
-      
+       
       <div class="relative w-[80%] animate-on-scroll overflow-hidden rounded-xl shadow-2xl border border-gray-200 dark:border-gray-800">
         <img 
           src="./images/screenshot.png"
@@ -58,3 +76,27 @@ import { asset } from '../utils/asset';
     </div>
   </div>
 </section>
+
+<script>
+  function updateBadgeTheme(e) {
+    const badge = document.getElementById('ms-store-badge');
+    if (badge) {
+      if (e.matches) {
+        // Dark mode is active
+        badge.setAttribute('theme', 'dark');
+      } else {
+        // Light mode is active
+        badge.setAttribute('theme', 'light');
+      }
+    }
+  }
+
+  // Create a media query list that watches for dark mode
+  const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  // Add the listener
+  darkModeMediaQuery.addEventListener('change', updateBadgeTheme);
+
+  // Run on initial load to set the correct theme
+  updateBadgeTheme(darkModeMediaQuery);
+</script>
