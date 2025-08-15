@@ -10,7 +10,11 @@
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Winget**          | **`winget install winhider`**                                                                                                                                                                       |
 | **Github Release**  | [Installer Link](https://github.com/aamitn/winhider/releases/download/v0.8.15/WinhiderInstaller.exe) • [Zip Bundle Link](https://github.com/aamitn/winhider/releases/download/v0.8.15/Winhider.zip) |
-| **Microsoft Store** | [Store Link](https://www.xbox.com/en-IN/auth/msa?action=logIn&returnUrl=%2Fen-IN%2Fgames%2Fstore%2Fdoom-the-dark-ages%2F9ph9x0760b0t&prompt=none)                                                   |
+| **Microsoft Store** | [Store Link](https://aka.ms/AAxky1o)                                                   |
+
+<a href="https://apps.microsoft.com/detail/XP99GV9280HRFP?referrer=appbadge&mode=direct">
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
 
 **Inno Installer Silet Switches** : `/VERYSILENT` , `/CURRENTUSER`  [Required for winget/ms store publishing]
 - Example Silent Install Command:
@@ -175,4 +179,5 @@ Yes! with the installer and zip-bundles we provide 3 ways to achieve this :
 ## Contribution Guideline
 
 Feel free to open an [`Issue`](https://github.com/aamitn/winhider/issues/new) / [`PR`](https://github.com/aamitn/winhider/compare) if you find a bug or would like to contribute!
+
 
