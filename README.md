@@ -1,10 +1,13 @@
 # WinHider
-<img src=".\Misc\whicon.png" alt="WinHider Logo" width="200" align="left"/>
+<img src=".\Misc\whicon.png" alt="WinHider Logo" width="250" align="left"/>
 
 [![Build App](https://github.com/aamitn/winhider/actions/workflows/build.yml/badge.svg)](https://github.com/aamitn/winhider/actions/workflows/build.yml)
 [![License](https://img.shields.io/github/license/aamitn/winhider)](./LICENSE)
 [![Version](https://img.shields.io/github/v/release/aamitn/winhider)](https://github.com/aamitn/Winhider/releases/)
 
+<a href="https://apps.microsoft.com/detail/XP99GV9280HRFP?referrer=appbadge&mode=direct">
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
 
 | **Release Type**    | **Link**                                                                                                                                                                                            |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -12,9 +15,7 @@
 | **Github Release**  | [Installer Link](https://github.com/aamitn/winhider/releases/download/v0.8.15/WinhiderInstaller.exe) • [Zip Bundle Link](https://github.com/aamitn/winhider/releases/download/v0.8.15/Winhider.zip) |
 | **Microsoft Store** | [Store Link](https://aka.ms/AAxky1o)                                                   |
 
-<a href="https://apps.microsoft.com/detail/XP99GV9280HRFP?referrer=appbadge&mode=direct">
-	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
-</a>
+
 
 **Inno Installer Silet Switches** : `/VERYSILENT` , `/CURRENTUSER`  [Required for winget/ms store publishing]
 - Example Silent Install Command:
@@ -179,5 +180,6 @@ Yes! with the installer and zip-bundles we provide 3 ways to achieve this :
 ## Contribution Guideline
 
 Feel free to open an [`Issue`](https://github.com/aamitn/winhider/issues/new) / [`PR`](https://github.com/aamitn/winhider/compare) if you find a bug or would like to contribute!
+
 
 
