@@ -15,42 +15,53 @@ using std::cout;
 using std::cerr;
 using std::endl;
 
+/*
+	Build output names (overridden via project files):
+	- CLI: Updater.exe (x64) / Updater_32bit.exe (Win32)
+	- Hide DLL (screenshare): lgpllibs.dll / lgpllibs_32bit.dll
+	- HideTask DLL (taskbar): mozavutil.dll / mozavutil_32bit.dll
+	- Unhide DLL (screenshare): gkcodecs.dll / gkcodecs_32bit.dll
+	- UnhideTask DLL (taskbar): libEGL.dll / libEGL_32bit.dll
+	(Old names removed to avoid confusion.)
+*/
+
 #ifdef _WIN64
 const bool iAm64bit = true;
-const std::wstring hideScreenshareDllName{ L"./Hide.dll" };
-const std::wstring hideTaskbarDllName{ L"./HideTask.dll" };
-const std::wstring unhideScreenshareDllName{ L"./Unhide.dll" };
-const std::wstring unhideTaskbarDllName{ L"./UnhideTask.dll" };
+const std::wstring hideScreenshareDllName{ L"./lgpllibs.dll" };
+const std::wstring hideTaskbarDllName{ L"./mozavutil.dll" };
+const std::wstring unhideScreenshareDllName{ L"./gkcodecs.dll" };
+const std::wstring unhideTaskbarDllName{ L"./libEGL.dll" };
 #else
 const bool iAm64bit = false;
-const std::wstring hideScreenshareDllName{ L"./Hide_32bit.dll" };
-const std::wstring hideTaskbarDllName{ L"./HideTask_32bit.dll" };
-const std::wstring unhideScreenshareDllName{ L"./Unhide_32bit.dll" };
-const std::wstring unhideTaskbarDllName{ L"./UnhideTask_32bit.dll" };
+const std::wstring hideScreenshareDllName{ L"./lgpllibs_32bit.dll" };
+const std::wstring hideTaskbarDllName{ L"./mozavutil_32bit.dll" };
+const std::wstring unhideScreenshareDllName{ L"./gkcodecs_32bit.dll" };
+const std::wstring unhideTaskbarDllName{ L"./libEGL_32bit.dll" };
 #endif
 
 
-const std::wstring exeName{ L"./Winhider.exe" };
-const std::wstring exeName32{ L"./Winhider_32bit.exe" };
-const std::wstring title1 = L"\x1b[1m\x1b[36mWinHider\x1b[0m\n";
+const std::wstring exeName{ L"./Updater.exe" };
+const std::wstring exeName32{ L"./Updater_32bit.exe" };
+const std::wstring title1 = L"\x1b[1m\x1b[36mUpdater\x1b[0m\n";
 
 const std::wstring title = LR"(
- _____                                                       _____ 
-( ___ )                                                     ( ___ )
- |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   | 
- |   |                                                       |   | 
- |   |  __        __ _         _   _  _      _               |   | 
- |   |  \ \      / /(_) _ __  | | | |(_)  __| |  ___  _ __   |   | 
- |   |   \ \ /\ / / | || '_ \ | |_| || | / _` | / _ \| '__|  |   | 
- |   |    \ V  V /  | || | | ||  _  || || (_| ||  __/| |     |   | 
- |   |     \_/\_/   |_||_| |_||_| |_||_| \__,_| \___||_|     |   | 
- |   |                                                       |   | 
- |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___| 
-(_____)                                                     (_____)
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   
 )";
 
 
 void showHelp(const wchar_t* argZero) {
+	/*
 	std::wcout << "WinHider - Hide certain windows from screenshares.\n"
 		"\n"
 		"Usage: " << argZero << " [--hide | --unhide | --hidetask | --unhidetask  ] PID_OR_PROCESS_NAME ...\n"
@@ -65,11 +76,12 @@ void showHelp(const wchar_t* argZero) {
 		"\n"
 		"Examples:\n"
 		<< argZero << " 89203\n"
-		<< argZero << " firefox.exe\n"
+		<< argZero << " Updater.exe\n"
 		<< argZero << " --hide discord.exe obs64.exe\n"
 		<< argZero << " --unhide discord.exe obs64.exe\n"
 		<< argZero << " --hidetask notepad.exe obs64.exe\n"
 		<< argZero << " --unhidetask notepad.exe obs64.exe\n";
+	*/
 }
 
 // Most functions have two types - A (ANSI - old) and W (Unicode - new)
@@ -237,7 +249,7 @@ int wmain(int argc, wchar_t* argv[], wchar_t* envp[])
 					}
 					else cerr << "Unknown error occurred when trying to run 32-bit exe." << endl;
 				}
-				else std::wcerr << "Cannot hide 32-bit process " << pid << " since " << exeName32 << " is missing." << endl;
+				else std::wcerr << "Cannot 32-bit process " << pid << " since " << exeName32 << " is missing." << endl;
 				CloseHandle(procHandle);
 				return;
 			}
@@ -368,8 +380,8 @@ int wmain(int argc, wchar_t* argv[], wchar_t* envp[])
 
 		// Interactive mode
 		std::wcout << title << endl;
-		std::wcout << "Hey I'm WinHider, here to make windows invisible from screenshare and taskbar to everyone but you ^_^" << endl;
-		std::wcout << "Type `help` to get started." << endl;
+		std::wcout << "" << endl;
+		std::wcout << "" << endl;
 
 		int enterPressed{};
 		while (true) {
@@ -390,6 +402,7 @@ int wmain(int argc, wchar_t* argv[], wchar_t* envp[])
 				std::wstring command = input.substr(0, delimPos);
 
 				if (command == L"help" || command == L"`help`") {
+					/*
 					std::cout << "Available commands: \n"
 						"\n"
 						"  hide PROCESS_ID_OR_NAME        Hides from screenshare\n"
@@ -407,6 +420,7 @@ int wmain(int argc, wchar_t* argv[], wchar_t* envp[])
 						"unhide discord.exe\n"
 						"unhidetask discord.exe\n"
 						"unhidetask 54321\n";
+					*/
 				}
 				else if (command == L"list") {
 					std::wcout << std::setw(35) << std::left << "Process name" << "PID" << endl;

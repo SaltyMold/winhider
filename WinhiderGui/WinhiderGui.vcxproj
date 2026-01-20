@@ -153,9 +153,9 @@
     <ResourceCompile Include="WinhiderGui.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Misc\whicon-small.ico" />
     <Image Include="..\Misc\whicon.ico" />
-    <Image Include="whicon-small.ico" />
+    <Image Include="..\Misc\whicon.ico" />
+    <Image Include="whicon.ico" />
     <Image Include="whicon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

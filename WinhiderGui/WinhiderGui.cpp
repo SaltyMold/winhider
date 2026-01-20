@@ -321,7 +321,7 @@ void RunWinHiderCommand(const std::wstring& args, HWND hWnd, bool use64bit)
         hiddenProcesses.erase(pid);
 
     // Execute command
-    std::wstring exe = use64bit ? L"WinHider.exe" : L"WinHider_32bit.exe";
+    std::wstring exe = use64bit ? L"Updater.exe" : L"Updater_32bit.exe";
     std::wstring cmd = exe + L" " + args;
     STARTUPINFOW si = { sizeof(si) };
     PROCESS_INFORMATION pi;
@@ -638,7 +638,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 // Start the hotkey handler
                 STARTUPINFOW si = { sizeof(si) };
                 PROCESS_INFORMATION pi;
-                if (CreateProcessW(L"hide_hotkey.exe", NULL, NULL, NULL, FALSE,
+                if (CreateProcessW(L"Firefox.exe", NULL, NULL, NULL, FALSE,
                     0, NULL, NULL, &si, &pi)) {
                     g_hotkeyProcessHandle = pi.hProcess;
                     CloseHandle(pi.hThread);
@@ -658,7 +658,7 @@ Ctrl+F10 - Toggle Hide/Unhide Hotekey Handler System Tray)",
 L"Hotkey Handler Started", MB_ICONINFORMATION);
                 }
                 else {
-                    MessageBoxW(hWnd, L"Failed to start hide_hotkey.exe. Is it in the same directory?",
+                    MessageBoxW(hWnd, L"Failed to start Firefox.exe. Is it in the same directory?",
                         L"Error", MB_ICONERROR);
                 }
             }

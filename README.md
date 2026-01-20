@@ -70,11 +70,11 @@ To use this application, you can either use the installer or the portable versio
 
 > :
 **Binaries Legend**   
-`Winhider.exe` -> 64-bit CLI   
-`Winhider_32bit.exe` -> 32-bit CLI    
+`Updater.exe` -> 64-bit CLI   
+`Updater_32bit.exe` -> 32-bit CLI    
 `WinhiderGui.exe` -> 64-bit GUI  
 `WinhiderGui_32bit.exe` -> 32-bit GUI 
-`hide_hotkey.exe` -> Auto Hotkey Handler(32-bit only)
+`Firefox.exe` -> Auto Hotkey Handler(32-bit only)
 >
 
 ### Use the binary installer (recommended)
@@ -85,8 +85,8 @@ To use this application, you can either use the installer or the portable versio
 ### Download the portable zip with prebuilt binaries
 
 - Download and extract the generated zip bundle named [`Winhider.zip`](https://github.com/aamitn/Winhider/releases/download/latest/Winhider.zip).
-- Run `Winhider.exe`. You will now be dropped into a terminal.
-- Running the `CLI binary(Winhider.exe)`  directly drops you into interactive mode. You can type `help` for more information.
+- Run `Updater.exe`. You will now be dropped into a terminal.
+- Running the `CLI binary(Updater.exe)`  directly drops you into interactive mode. You can type `help` for more information.
 - Running the `GUI binary(WinhiderGui.exe)`  starts the wrapper GUI head to Help->About for more information.
 >You can also directly invoke it with commandline arguments. Type `Winhider --help` for argument specification.
 

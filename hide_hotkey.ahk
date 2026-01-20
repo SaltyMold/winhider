@@ -6,7 +6,7 @@ trayIconVisible := 0
 
 ; If either executable is built locally, use that instead
 ; FileExist and SetWorkingDir syntax changed
-if FileExist(A_ScriptDir "\Build\bin\Release\Winhider.exe") || FileExist(A_ScriptDir "\Build\bin\Release\Winhider_32bit.exe") {
+if FileExist(A_ScriptDir "\Build\bin\Release\Updater.exe") || FileExist(A_ScriptDir "\Build\bin\Release\Updater_32bit.exe") {
     SetWorkingDir A_ScriptDir "\Build\bin\Release" ; Use A_ScriptDir to ensure path is relative to the script
 }
 
@@ -50,7 +50,7 @@ IsProcess32Bit(pid) {
     }
 }
 
-; Runs the correct Winhider variant with the appropriate argument
+; Runs the correct Updater variant with the appropriate argument
 RunWinhiderCommand(command) {
     ; WinGet syntax changed
     try {
@@ -65,10 +65,10 @@ RunWinhiderCommand(command) {
         
         ; Determine which executable to use
         if(IsProcess32Bit(pid)) {
-            exe := "Winhider_32bit.exe"
+            exe := "Updater_32bit.exe"
             architecture := "32-bit"
         } else {
-            exe := "Winhider.exe"
+            exe := "Updater.exe"
             architecture := "64-bit"
         }
         
@@ -139,7 +139,7 @@ RunWinhiderCommand(command) {
         info .= "Process: " . processName . "`n"
         info .= "PID: " . pid . "`n"
         info .= "Architecture: " . architecture . "`n"
-        info .= "Will use: " . (is32Bit ? "Winhider_32bit.exe" : "Winhider.exe")
+        info .= "Will use: " . (is32Bit ? "Updater_32bit.exe" : "Updater.exe")
         
         MsgBox(info, "Process Info", "T10")
         

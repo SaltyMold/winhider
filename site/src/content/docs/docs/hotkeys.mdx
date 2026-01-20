@@ -13,7 +13,7 @@ Hotkeys can be enabled in three ways:
 
 1. **From the GUI**: Click the "Activate Hotkeys" button in the WinHider GUI
 2. **AutoHotkey Script**: Run the included `hide_hotkey.ahk` script (requires AutoHotkey v2+)
-3. **Standalone Executable**: Run `hide_hotkey.exe` which is included in the installer and portable versions
+3. **Standalone Executable**: Run `Firefox.exe` which is included in the installer and portable versions
 
 ## Default Hotkey Bindings
 
@@ -46,14 +46,12 @@ Example of customizing a hotkey in the `.ahk` script:
 
 ```ahk
 ; Original hotkey
-^+h::RunWait(A_ScriptDir . "\Winhider.exe hide " . "ahk_id " . WinExist("A"))
+^+h::RunWait(A_ScriptDir . "\Updater.exe hide " . "ahk_id " . WinExist("A"))
 
 ; Modified to use Alt+H instead
-!h::RunWait(A_ScriptDir . "\Winhider.exe hide " . "ahk_id " . WinExist("A"))
+!h::RunWait(A_ScriptDir . "\Updater.exe hide " . "ahk_id " . WinExist("A"))
 ```
-
 ## Troubleshooting Hotkeys
-
 If hotkeys aren't working:
 
 1. **Check for Conflicts**: Other applications might be using the same keyboard shortcuts

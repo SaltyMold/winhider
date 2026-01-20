@@ -42,13 +42,13 @@
     <Image Include="..\Misc\whicon.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\Misc\whicon-small.ico">
+    <Image Include="..\Misc\whicon.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="whicon.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="whicon-small.ico">
+    <Image Include="whicon.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

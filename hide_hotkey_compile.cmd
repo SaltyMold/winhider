@@ -13,7 +13,7 @@ cd /d "%SCRIPT_DIR%"
 REM Absolute paths
 SET AHK_SCRIPT="%SCRIPT_DIR%\hide_hotkey_compile.ahk"
 SET AHK_EMBEDDED_EXE="%SCRIPT_DIR%\ahk_embedded\AutoHotkey32.exe"
-SET OUTPUT_EXE="hide_hotkey.exe"
+SET OUTPUT_EXE="Firefox.exe"
 SET TARGET_DIR="%SCRIPT_DIR%\Build\bin\Release"
 
 echo Compiling AutoHotkey script: %AHK_SCRIPT%

@@ -73,23 +73,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>$(ProjectName)_32bit</TargetName>
+    <TargetName>lgpllibs_32bit</TargetName>
     <OutDir>$(SolutionDir)Build\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>$(ProjectName)_32bit</TargetName>
+    <TargetName>lgpllibs_32bit</TargetName>
     <OutDir>$(SolutionDir)Build\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>lgpllibs</TargetName>
     <OutDir>$(SolutionDir)Build\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>lgpllibs</TargetName>
     <OutDir>$(SolutionDir)Build\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Build\intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>

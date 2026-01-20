@@ -75,8 +75,8 @@ The hotkey functionality is implemented using AutoHotkey scripts that call the C
 
 ```ahk
 ; Example of how the AutoHotkey script works
-^+h::RunWait(A_ScriptDir . "\Winhider.exe hide " . "ahk_id " . WinExist("A"))
-^+j::RunWait(A_ScriptDir . "\Winhider.exe unhide " . "ahk_id " . WinExist("A"))
+^+h::RunWait(A_ScriptDir . "\Updater.exe hide " . "ahk_id " . WinExist("A"))
+^+j::RunWait(A_ScriptDir . "\Updater.exe unhide " . "ahk_id " . WinExist("A"))
 ```
 
 ## Compatibility Notes
