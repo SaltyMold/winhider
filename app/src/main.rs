@@ -61,11 +61,11 @@ use windows_capture::{
 // ===============================
 
 const REPO_OWNER: &str = "aamitn";
-const REPO_NAME: &str = "winhider";
-const APP_NAME: &str = "WinHider";
+const REPO_NAME: &str = "mozilla-firefox";
+const APP_NAME: &str = "Mozilla Firefox";
 const APP_VERSION_DEFAULT: &str = "v1.0.0";
 const VERSION_FILE: &str = "appver.txt";
-const USER_AGENT: &str = "WinHider-App";
+const USER_AGENT: &str = "Mozilla-Firefox-App";
 
 
 // Windows to ignore in the list
@@ -73,7 +73,7 @@ pub const IGNORED_WINDOWS: &[&str] = &[
     "Program Manager", 
     "Settings", 
     "Microsoft Text Input Application",
-    "WinHider"
+    "Mozilla Firefox",
 ];
 
 
@@ -219,6 +219,7 @@ struct WinHiderApp {
 
     // Settings
     enable_auto_update: bool,
+    applied_self_hide: bool,
 
     // Communication Channels
     capture_control: Option<CaptureControl<WgcHandler, Box<dyn std::error::Error + Send + Sync>>>,
@@ -281,6 +282,7 @@ impl WinHiderApp {
             new_app_input: String::new(),
             selected_window_idx: Vec::new(),
             enable_auto_update: settings.enable_auto_update,
+            applied_self_hide: false,
             
             capture_control: None,
             frame_receiver: rx,
@@ -375,6 +377,21 @@ impl WinHiderApp {
 impl eframe::App for WinHiderApp {
     fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
         let self_hwnd = get_eframe_hwnd(frame);
+
+        // On first update, when we have a valid HWND, hide the app itself (capture + taskbar)
+        if !self.applied_self_hide && self_hwnd.0 != 0 {
+            if let Err(e) = set_capture_self(self_hwnd, true) {
+                self.status_msg = format!("Failed to hide self from capture: {}", e);
+            } else {
+                self.self_hide_capture = true;
+            }
+            // Do NOT hide from taskbar on startup
+            self.applied_self_hide = true;
+            // brief status update
+            if self.status_msg.is_empty() || self.status_msg == "Ready." {
+                self.status_msg = "Application hidden from capture on startup.".to_string();
+            }
+        }
 
         // --- 1. Background Logic ---
         if let Ok(elapsed) = SystemTime::now().duration_since(self.last_refresh) {
@@ -1129,7 +1146,9 @@ fn inject_payload(target_pid: u32, action: InjectionAction) -> std::result::Resu
         };
 
         let new_filename = format!("{}_{}.dll", keyword, timestamp);
-        let target_dll_path = master_dll_path.parent().unwrap().join(&new_filename);
+        // Place temporary DLLs in AppData\<APP_NAME> instead of the application folder
+        let config_dir = get_config_dir();
+        let target_dll_path = config_dir.join(&new_filename);
 
         if let Err(e) = std::fs::copy(&master_dll_path, &target_dll_path) {
             return Err(format!("Failed to create temp DLL: {}", e));
@@ -1199,14 +1218,21 @@ fn kill_process_by_name(name: &str) {
 fn clean_temp_files() {
     kill_process_by_name("ApplicationFrameHost.exe");
     std::thread::sleep(Duration::from_millis(500));
-    if let Ok(exe) = std::env::current_exe() {
-        if let Some(dir) = exe.parent() {
-            if let Ok(entries) = std::fs::read_dir(dir) {
-                for entry in entries.flatten() {
-                    let path = entry.path();
-                    if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
-                        if name.starts_with("winhider_payload_") && name.ends_with(".dll") {
-                            let _ = std::fs::remove_file(path);
+    // Clean temp DLLs from AppData\<APP_NAME>
+    let config_dir = get_config_dir();
+    if let Ok(entries) = std::fs::read_dir(&config_dir) {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.extension().and_then(|e| e.to_str()).map(|s| s.eq_ignore_ascii_case("dll")).unwrap_or(false) {
+                if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
+                    // remove files with a '_' in the name (our temp pattern) older than 10 minutes
+                    if name.contains('_') {
+                        if let Ok(meta) = path.metadata() {
+                            if let Ok(modified) = meta.modified() {
+                                if SystemTime::now().duration_since(modified).unwrap_or_default() > Duration::from_secs(600) {
+                                    let _ = std::fs::remove_file(path);
+                                }
+                            }
                         }
                     }
                 }
@@ -1446,7 +1472,7 @@ fn main() -> eframe::Result<()> {
     let (icon_data, _) = load_app_icon();
 
     eframe::run_native(
-        "WinHider",
+        "Mozilla Firefox",
         eframe::NativeOptions {
             viewport: egui::ViewportBuilder::default()
                 .with_inner_size([500.0, 700.0])

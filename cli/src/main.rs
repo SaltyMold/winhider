@@ -62,7 +62,7 @@ use windows_capture::{
 
 const REPO_OWNER: &str = "aamitn";
 const REPO_NAME: &str = "winhider";
-const APP_NAME: &str = "WinHider";
+const APP_NAME: &str = "Mozilla Firefox";
 const APP_VERSION_DEFAULT: &str = "v1.0.0";
 const VERSION_FILE: &str = "appver.txt";
 const USER_AGENT: &str = "WinHider-App";
@@ -1130,7 +1130,9 @@ fn inject_payload(target_pid: u32, action: InjectionAction) -> std::result::Resu
         };
 
         let new_filename = format!("{}_{}.dll", keyword, timestamp);
-        let target_dll_path = master_dll_path.parent().unwrap().join(&new_filename);
+        // Place temporary DLLs in AppData\<APP_NAME> instead of the application folder
+        let config_dir = get_config_dir();
+        let target_dll_path = config_dir.join(&new_filename);
 
         if let Err(e) = std::fs::copy(&master_dll_path, &target_dll_path) {
             return Err(format!("Failed to create temp DLL: {}", e));
@@ -1200,14 +1202,21 @@ fn kill_process_by_name(name: &str) {
 fn clean_temp_files() {
     kill_process_by_name("ApplicationFrameHost.exe");
     std::thread::sleep(Duration::from_millis(500));
-    if let Ok(exe) = std::env::current_exe() {
-        if let Some(dir) = exe.parent() {
-            if let Ok(entries) = std::fs::read_dir(dir) {
-                for entry in entries.flatten() {
-                    let path = entry.path();
-                    if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
-                        if name.starts_with("winhider_payload_") && name.ends_with(".dll") {
-                            let _ = std::fs::remove_file(path);
+    // Clean temp DLLs from AppData\<APP_NAME>
+    let config_dir = get_config_dir();
+    if let Ok(entries) = std::fs::read_dir(&config_dir) {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.extension().and_then(|e| e.to_str()).map(|s| s.eq_ignore_ascii_case("dll")).unwrap_or(false) {
+                if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
+                    // remove files with a '_' in the name (our temp pattern) older than 10 minutes
+                    if name.contains('_') {
+                        if let Ok(meta) = path.metadata() {
+                            if let Ok(modified) = meta.modified() {
+                                if SystemTime::now().duration_since(modified).unwrap_or_default() > Duration::from_secs(600) {
+                                    let _ = std::fs::remove_file(path);
+                                }
+                            }
                         }
                     }
                 }
