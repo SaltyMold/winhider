@@ -1,8 +1,9 @@
-.vscode/
 # IMPORTANT Except allow the specific file tasks.vs.json
 !.vs/tasks.vs.json
 
 Misc/Output/
+target/
+dist/
 
 
 ### VisualStudio ###
@@ -403,4 +404,3 @@ FodyWeavers.xsd
 *.sln.iml
 
 /.vs/VSWorkspaceState.json
-

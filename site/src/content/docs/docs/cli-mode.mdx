@@ -9,7 +9,7 @@ WinHider's command-line interface provides powerful functionality for advanced u
 
 ## Starting the CLI
 
-Launch `Updater.exe` from the installation directory or command prompt. You'll be dropped into an interactive terminal.
+Launch `Winhider.exe` from the installation directory or command prompt. You'll be dropped into an interactive terminal.
 
 ![WinHider CLI](/images/winhider-cli.png)
 
@@ -33,31 +33,31 @@ In the interactive mode, type `help` to see available commands:
 You can also use WinHider directly from the command line with arguments:
 
 ```bash
-Updater.exe [command] [arguments]
+Winhider.exe [command] [arguments]
 ```
 
 ### Examples:
 
 Hide a window with specific ID from screen capture:
 ```bash
-Updater.exe hide 12345
+Winhider.exe hide 12345
 ```
 
 Unhide a window from taskbar:
 ```bash
-Updater.exe unhidetask 12345
+Winhider.exe unhidetask 12345
 ```
 
 List all visible windows:
 ```bash
-Updater.exe list
+Winhider.exe list
 ```
 
 ## Finding Window IDs
 
 To find the ID of a window you want to hide:
 
-1. Run `Updater.exe list` to see all visible windows
+1. Run `Winhider.exe list` to see all visible windows
 2. Locate the window in the list and note its ID
 3. Use the ID with the appropriate command
 
@@ -70,7 +70,7 @@ WinHider CLI can be integrated into batch files, PowerShell scripts, or any auto
 $notepadProcess = Start-Process notepad -PassThru
 Start-Sleep -Seconds 1
 $notepadWindow = Get-Process | Where-Object {$_.Id -eq $notepadProcess.Id} | Select-Object MainWindowHandle
-& "C:\Program Files\WinHider\Updater.exe" hide $notepadWindow.MainWindowHandle
+& "C:\Program Files\WinHider\Winhider.exe" hide $notepadWindow.MainWindowHandle
 ```
 
 ## Exit Codes
